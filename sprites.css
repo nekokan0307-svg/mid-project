@@ -32,3 +32,19 @@ html body img.puppy,html body img.puppy.idle,html body img.puppy.dance-left,html
  #game .play-area{height:395px}
  #game .lane .hit{top:67%}
 }
+
+/* Music volume and educational intensity guide */
+.fb-volume-control{display:flex;flex-direction:column;align-items:center;gap:12px;margin:20px auto;padding:18px;max-width:360px;background:#fff9edf2;border:2px solid #d5a0b8;border-radius:22px;font-size:1.1rem}
+.fb-volume-control input{width:100%;accent-color:#e987b2;cursor:pointer}
+#intensity-guide{overflow-y:auto;padding-bottom:35px}
+.fb-guide-intro{max-width:680px;margin:0 auto 18px}
+.fb-guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;max-width:1060px;margin:0 auto 20px;text-align:left}
+.fb-guide-grid article{background:#fff9edf2;border:2px solid #d5a0b8;border-radius:20px;padding:16px}
+.fb-guide-grid h3{margin:0 0 10px;color:#b85f93}
+.fb-guide-grid p{line-height:1.45;margin:8px 0}
+.fb-guide-note{max-width:950px;margin:12px auto 22px;padding:17px;background:#fff9e6e8;border:2px solid #e5c891;border-radius:20px;line-height:1.55;text-align:left}
+#intensity-guide>button{margin:5px}
+
+/* Approved panoramic artwork: Maximum and Interval scenes */
+#game[data-level="3"] .game-bg{background-image:url('assets/level4-amusement.webp')!important;background-position:center!important}
+#game[data-level="4"] .game-bg{background-image:url('assets/level5-lakeside.webp')!important;background-position:center!important}

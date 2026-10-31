@@ -8,8 +8,8 @@ const intensity=[
  {id:'light',name:'Light · เบา',bpm:80,duration:60,scene:0},
  {id:'moderate',name:'Moderate · ปานกลาง',bpm:110,duration:90,scene:1},
  {id:'vigorous',name:'Vigorous · หนัก',bpm:130,duration:120,scene:2},
- {id:'maximum',name:'Maximum · หนักมาก',bpm:150,duration:120,scene:2},
- {id:'interval',name:'Interval · หนักสลับเบา',bpm:150,duration:120,scene:2}
+ {id:'maximum',name:'Maximum · หนักมาก',bpm:150,duration:120,scene:3},
+ {id:'interval',name:'Interval · หนักสลับเบา',bpm:150,duration:120,scene:4}
 ];
 let phase='workout',mode=intensity[0],score=0,combo=0,maxCombo=0,perfect=0,good=0,miss=0;
 let notes=[],elapsed=0,last=0,spawnAt=0,playing=false,paused=false,raf=0;
@@ -24,7 +24,7 @@ function currentBpm(){
 }
 function audioReady(){
  try{
-  if(!ctx){const AC=window.AudioContext||window.webkitAudioContext;ctx=new AC();master=ctx.createGain();master.gain.value=.18;master.connect(ctx.destination)}
+  if(!ctx){const AC=window.AudioContext||window.webkitAudioContext;ctx=new AC();master=ctx.createGain();master.gain.value=Number($('music-volume')?.value||75)/100*.48;master.connect(ctx.destination)}
   if(ctx.state==='suspended')ctx.resume().catch(()=>{});
   return true;
  }catch(e){return false}
@@ -38,6 +38,12 @@ function synth(f,t,d=.1,v=.07,type='sine',end=0){
  o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.02);
 }
 const chords=[[261.63,329.63,392],[293.66,349.23,440],[329.63,392,493.88],[261.63,349.23,440]];
+const melodies=[
+ [523.25,659.25,783.99,659.25,587.33,523.25,440,493.88],
+ [659.25,783.99,880,783.99,698.46,659.25,587.33,659.25],
+ [783.99,987.77,1046.5,987.77,880,783.99,659.25,698.46],
+ [698.46,880,987.77,880,783.99,698.46,587.33,659.25]
+];
 function playBeat(t,n){
  const s=n%8,bar=Math.floor(n/8),ch=chords[Math.floor(bar/2)%4];
  if(s===0||s===4)synth(130,t,.16,.32,'sine',48);
@@ -46,6 +52,14 @@ function playBeat(t,n){
  if(s===0||s===4)synth(ch[0]/2,t,.22,.10,'triangle');
  if(s===0)ch.forEach((f,j)=>synth(f,t+j*.01,.27,.027));
  if(s===3||s===7)synth(ch[(bar+s)%3]*2,t,.12,.045);
+ // Original melodic phrases: varied by harmony, with occasional rests.
+ const phrase=melodies[Math.floor(bar/2)%4];
+ if(s%2===0 || (bar%4===3 && s===7)){
+   const note=phrase[(s+Math.floor(bar/2))%8];
+   synth(note,t,.19,.080,'triangle');
+   synth(note/2,t,.25,.023,'sine');
+ }
+ if(s===0 && bar%4===0)synth(1046.5,t,.38,.038,'sine');
 }
 function musicTick(){
  if(!playing||paused||!ctx||!$('sound')?.checked)return;
@@ -68,6 +82,30 @@ function show(id){
  if(id!=='game'){playing=false;cancelAnimationFrame(raf);stopMusic()}
 }
 document.querySelectorAll('[data-screen]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.screen)));
+const homeLevelButton=[...document.querySelectorAll('#home .menu button')].find(b=>b.textContent.includes('Level Select'));
+if(homeLevelButton){
+ homeLevelButton.dataset.screen='intensity-guide';
+ homeLevelButton.textContent='📖 Intensity Guide';
+ homeLevelButton.addEventListener('click',()=>show('intensity-guide'));
+}
+const guide=document.createElement('section');
+guide.id='intensity-guide';guide.className='screen';
+guide.innerHTML=`<h2>🌸 Exercise Intensity Guide</h2>
+<p class="fb-guide-intro">Understand exercise intensity, energy systems and heart-rate monitoring before choosing your workout.</p>
+<div class="fb-guide-grid">
+<article><h3>🌿 Light · เบา</h3><p>Easy breathing, comfortable conversation. RPE 9–11/20. Approx. 50–63% HRmax.</p><p><b>Energy:</b> Predominantly aerobic/oxidative pathways.</p></article>
+<article><h3>🌼 Moderate · ปานกลาง</h3><p>Breathing faster, but still able to talk. RPE 12–13/20. Approx. 64–76% HRmax.</p><p><b>Energy:</b> Mostly aerobic, with increased carbohydrate use.</p></article>
+<article><h3>🔥 Vigorous · หนัก</h3><p>Breathing hard; only short phrases. RPE 14–16/20. Approx. 77–95% HRmax.</p><p><b>Energy:</b> Aerobic and anaerobic glycolysis both contribute.</p></article>
+<article><h3>⚡ Maximum · หนักมาก</h3><p>Near-maximal effort, difficult to sustain. RPE 17–20/20. HR alone responds too slowly for short maximal bursts.</p><p><b>Energy:</b> ATP-PCr and fast glycolysis contribute strongly; aerobic energy also contributes.</p></article>
+<article><h3>💜 Interval · หนักสลับเบา</h3><p>Alternate hard effort and easy recovery. Monitor HR trends and recovery, but also use the talk test and perceived effort.</p><p><b>Energy:</b> Mix of ATP-PCr, glycolytic and oxidative pathways, depending on work/rest duration.</p></article>
+</div>
+<div class="fb-guide-note"><b>Heart-rate guidance:</b> An approximate HRmax formula is 220 − age, but individual values vary. These zones are rough educational examples, not personalized exercise prescriptions. Medications, fitness and health conditions can affect HR response. <b>Music BPM is not exercise intensity or heart rate.</b> Energy systems always overlap; calories cannot be estimated reliably without personal and activity data.</div>
+<button data-screen="levels" class="fb-guide-start">🌸 Choose Workout</button>
+<button data-screen="home" class="secondary fb-guide-home">← Home</button>`;
+document.querySelector('.shell')?.append(guide);
+screens.push(guide);
+guide.querySelector('.fb-guide-start').addEventListener('click',()=>show('levels'));
+guide.querySelector('.fb-guide-home').addEventListener('click',()=>show('home'));
 const levelGrid=document.querySelector('#levels .level-grid');
 const section=document.getElementById('levels');
 const heading=section?.querySelector('h2');
@@ -82,7 +120,7 @@ if(levelGrid){
   phaseBar.querySelectorAll('button').forEach(b=>{b.classList.toggle('selected',b.dataset.phase===phase);b.setAttribute('aria-pressed',String(b.dataset.phase===phase))});
   if(phase==='workout'){
    detail.textContent='Choose workout intensity. BPM is music tempo, not a clinical intensity measure.';
-   levelGrid.innerHTML=intensity.map((m,i)=>'<button class="level" type="button" data-mode="'+m.id+'"><img src="assets/'+['level1-spring.webp','level2-bakery.webp','level3-night.webp'][m.scene]+'" alt=""><b>'+m.name+'</b><span>'+(m.id==='interval'?'80 ↔ 150':m.bpm)+' BPM · '+m.duration+' sec</span></button>').join('');
+   levelGrid.innerHTML=intensity.map((m,i)=>'<button class="level" type="button" data-mode="'+m.id+'"><img src="assets/'+['level1-spring.webp','level2-bakery.webp','level3-night.webp','level4-amusement.webp','level5-lakeside.webp'][m.scene]+'" alt=""><b>'+m.name+'</b><span>'+(m.id==='interval'?'80 ↔ 150':m.bpm)+' BPM · '+m.duration+' sec</span></button>').join('');
   }else{
    const warm=phase==='warmup';
    detail.textContent=warm?'A gentle warm-up with gradually increasing tempo.':'A gentle cool-down with gradually decreasing tempo.';
@@ -175,5 +213,17 @@ $('pause').addEventListener('click',()=>{
  if(ctx)nextBeat=ctx.currentTime+.07;
 });
 $('sound')?.addEventListener('change',()=>{if(ctx)nextBeat=ctx.currentTime+.07});
+const soundSetting=$('sound');
+if(soundSetting){
+ const vol=document.createElement('label');
+ vol.className='fb-volume-control';
+ vol.innerHTML='<span>🎵 Music volume <strong id="music-volume-label">75%</strong></span><input id="music-volume" type="range" min="0" max="100" value="75" step="1" aria-label="Music volume">';
+ soundSetting.closest('.setting')?.after(vol);
+ $('music-volume').addEventListener('input',e=>{
+  const v=Number(e.target.value);
+  $('music-volume-label').textContent=v+'%';
+  if(master&&ctx)master.gain.setTargetAtTime(v/100*.48,ctx.currentTime,.02);
+ });
+}
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing&&!paused){paused=true;$('pause').textContent='▶';last=0}});
 })();
