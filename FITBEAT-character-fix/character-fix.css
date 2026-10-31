@@ -1,0 +1,14 @@
+/* FITBEAT Character Visibility Fix v1
+   Loaded after scene-fix.css and art-ui.css. Does not alter background art. */
+#home .puppy-stage { overflow: visible !important; min-width: 0; padding: 18px 34px 26px; box-sizing: border-box; }
+#home .puppy-stage .puppy { width: min(250px, 75%) !important; height: auto !important; max-height: 270px !important; object-fit: contain !important; transform-origin: center 70%; }
+#game .play-area { overflow: visible !important; }
+#game .game-puppy { overflow: visible !important; width: 22%; left: 2%; bottom: 22px; padding: 26px 22px 22px; box-sizing: content-box; pointer-events: none; }
+#game .game-puppy .puppy { display: block; width: 100% !important; height: auto !important; max-height: 205px !important; object-fit: contain !important; transform-origin: center 70%; }
+#results .result-card .puppy { width: 120px !important; height: auto !important; max-height: 160px !important; object-fit: contain !important; }
+@media(max-width:700px){
+  #home .puppy-stage { height: 190px !important; padding: 8px 22px 18px !important; }
+  #home .puppy-stage .puppy { height: 148px !important; width: auto !important; max-height: 148px !important; }
+  #game .game-puppy { width: 21% !important; left: 0; bottom: 35px; padding: 16px 12px 18px; }
+  #game .game-puppy .puppy { max-height: 130px !important; }
+}
