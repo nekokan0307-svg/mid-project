@@ -1,14 +1,9 @@
-# FITBEAT v0.2 — Cozy Animated Edition
+# FITBEAT v0.3 — Separate Art Layers
 
-A pastel 2D rhythm-fitness prototype inspired by the approved game art reference. Includes original layered art panels, a hand-built SVG puppy with CSS movement animations, three playable levels, flower timing, score/combo, sound and results.
+This build replaces the previous full-screen concept-art screenshots with original standalone SVG backgrounds (`assets/*-scene.svg`). **No menus, characters, labels, scores or buttons are baked into these backgrounds.** The puppy remains a separate SVG with CSS movement animations; the rhythm targets and HUD are live HTML/JS.
 
-## GitHub Pages
-Upload all contents of this ZIP to the **root** of your existing `mid-project` repository (replace files with matching names), commit, and refresh the Pages URL. Do not upload the ZIP itself.
+## Deploy to GitHub Pages
+Unzip and upload the **contents** (not the ZIP) to the root of `mid-project` on branch `main`, replacing matching files. Open `https://nekokan0307-svg.github.io/mid-project/?v=3`. You may leave old image files in assets; they are no longer used for screen backgrounds.
 
-## Controls
-Open `index.html`. Choose a level. On the computer, use Left Arrow, Right Arrow, Up Arrow and Space (Twist) to hit falling flowers near the target line. Pause button supported.
-
-Open `controller.html` on iPhone Safari (HTTPS), tap Enable Motion and Calibrate. The page displays sensor readings, but **does not yet connect to the computer**. Real-time remote control requires a relay server and pairing, planned for next iteration.
-
-## Art & animations
-`assets/puppy.svg` is a separate animatable character. CSS classes `idle`, `dance-left`, `dance-right`, `reach`, `twist`, `cheer`, and `miss` animate it. Background art is cropped from the user-approved reference concept; some decorative UI text is baked into those art images, while the actual buttons and HUD are separate interactive HTML. Future production assets should be individually illustrated to avoid repeated baked-in labels.
+## Current limitations
+The puppy is an animated single SVG using CSS transformations, not yet a multi-frame skeletal animation. iPhone controller displays motion readings but does not yet send live commands to the computer. Keyboard controls work.
