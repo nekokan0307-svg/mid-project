@@ -1,31 +1,14 @@
-# 🌸 FITBEAT — Move to the Beat!
+# FITBEAT v0.2 — Cozy Animated Edition
 
-A cozy 2D rhythm-fitness web-game starter for a midterm project.
+A pastel 2D rhythm-fitness prototype inspired by the approved game art reference. Includes original layered art panels, a hand-built SVG puppy with CSS movement animations, three playable levels, flower timing, score/combo, sound and results.
 
-## Included (v0.1)
-- `index.html`: desktop rhythm game demo, keyboard/buttons, score, combo, timer, results
-- `controller.html`: iPhone motion sensor test with permission and calibration
-- `style.css`: pastel cozy styling
-- `game.js`, `controller.js`: JavaScript logic
-- `assets/concept-art.png`: visual concept reference (not yet sliced into production sprites)
+## GitHub Pages
+Upload all contents of this ZIP to the **root** of your existing `mid-project` repository (replace files with matching names), commit, and refresh the Pages URL. Do not upload the ZIP itself.
 
-## Publish with GitHub Pages
-1. Create a **public** GitHub repository named `fitbeat`.
-2. Upload the **contents** of this folder to the repository root, keeping `assets/` as a folder.
-3. Go to **Settings → Pages → Build and deployment**.
-4. Select **Deploy from a branch**, branch **main**, folder **/(root)**, and **Save**.
-5. Wait for deployment, then open `https://YOUR-USERNAME.github.io/fitbeat/`.
-6. Open `https://YOUR-USERNAME.github.io/fitbeat/controller.html` on your iPhone in Safari and tap **Enable Motion**.
+## Controls
+Open `index.html`. Choose a level. On the computer, use Left Arrow, Right Arrow, Up Arrow and Space (Twist) to hit falling flowers near the target line. Pause button supported.
 
-## Important limitations
-- This starter **does not yet connect the iPhone to the computer**. That requires a separate real-time service (e.g. Socket.IO on a deployed server), room pairing and secure connections.
-- The game demo currently responds to **keyboard/buttons**; sensor values appear only on the phone page.
-- GitHub Pages hosts static files, **not a Node.js WebSocket server**.
-- DeviceOrientation requires user permission on iOS Safari and a secure HTTPS context.
-- Phone orientation does not verify exercise form or measure joint angles.
+Open `controller.html` on iPhone Safari (HTTPS), tap Enable Motion and Calibrate. The page displays sensor readings, but **does not yet connect to the computer**. Real-time remote control requires a relay server and pairing, planned for next iteration.
 
-## Next steps
-1. Test sensor axes on iPhone and calibrate.
-2. Add WebSocket room pairing and real-time game control.
-3. Create original sprite sheets/backgrounds based on the approved art direction.
-4. Add original rhythm audio and beat synchronization.
+## Art & animations
+`assets/puppy.svg` is a separate animatable character. CSS classes `idle`, `dance-left`, `dance-right`, `reach`, `twist`, `cheer`, and `miss` animate it. Background art is cropped from the user-approved reference concept; some decorative UI text is baked into those art images, while the actual buttons and HUD are separate interactive HTML. Future production assets should be individually illustrated to avoid repeated baked-in labels.
