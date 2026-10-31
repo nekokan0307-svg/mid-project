@@ -105,3 +105,12 @@ body{min-height:100dvh}
  #game .hud .pill{padding:3px 9px}
  #game .controls button{padding:4px 12px}
 }
+
+/* Final viewport safety: no page overflow; game and level panels own their scrolling. */
+html,body{height:100%;overflow:hidden!important}
+.shell{height:calc(100dvh - 16px)!important;min-height:0!important}
+.shell>.screen.active{min-height:0!important}
+#game.active{overflow:hidden!important}
+#game .game-bg{background-size:cover!important;background-position:center!important}
+#levels.active{overflow-y:auto!important}
+@media(max-width:700px){.shell{height:100dvh!important;margin:0!important}}
