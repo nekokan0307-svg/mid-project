@@ -1,6 +1,34 @@
 /* FITBEAT still-only v3 — prevent all legacy mascot movement */
-html body img.puppy,html body img.puppy.idle,html body img.puppy.dance-left,html body img.puppy.dance-right,html body img.puppy.reach,html body img.puppy.twist,html body img.puppy.cheer,html body img.puppy.miss,html body img.puppy.still-puppy {
- animation:none!important;animation-name:none!important;transition:none!important;transform:none!important;filter:none!important;will-change:auto!important;
- object-fit:contain!important;object-position:center center!important;
+html body img.puppy,html body img.puppy.idle,html body img.puppy.dance-left,html body img.puppy.dance-right,html body img.puppy.reach,html body img.puppy.twist,html body img.puppy.cheer,html body img.puppy.miss{
+ animation:none!important;transition:none!important;transform:none!important;will-change:auto!important;
 }
-html body .puppy { overflow:visible!important; }
+.puppy{object-fit:contain!important}
+
+/* FITBEAT Final Update: preserve approved v3 art and backgrounds. */
+#levels .fb-phase-tabs{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:4px auto 14px}
+#levels .fb-phase-tabs button{border-radius:30px;background:#fff8ed;padding:10px 18px;font-size:1rem}
+#levels .fb-phase-tabs button.selected{background:#ffc6da;border-color:#b57a9c;box-shadow:0 4px 0 #b57a9c55}
+#levels .fb-phase-help{position:relative;margin:0 auto 15px;max-width:660px;color:#78596a}
+#levels .level-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));max-width:1100px;gap:14px}
+#levels .level{padding:10px;gap:7px;min-width:0}
+#levels .level img{height:160px}
+#levels .level b{font-size:1.02rem}
+#levels .level span{font-size:.84rem}
+#levels .fb-single{max-width:350px;justify-self:center;width:100%}
+#game .lanes{height:390px}
+#game .lane .hit{top:67%;bottom:auto;transform:translate(-50%,-50%);z-index:2}
+#game .lane .hit::before{content:"";position:absolute;inset:-6px;border:2px solid #ffcf70;border-radius:50%;box-shadow:0 0 10px #fff4a9;pointer-events:none}
+#game .lane .hit img{display:block}
+#game .lane .note{z-index:3}
+#game .game-tip{font-size:.84rem}
+@media(max-width:700px){
+ #levels .fb-phase-tabs{gap:5px}
+ #levels .fb-phase-tabs button{font-size:.83rem;padding:8px 10px}
+ #levels .level-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ #levels .level img{height:110px}
+ #levels .level b{font-size:.89rem}
+ #levels .level span{font-size:.77rem}
+ #game .lanes{height:350px;top:5px}
+ #game .play-area{height:395px}
+ #game .lane .hit{top:67%}
+}
