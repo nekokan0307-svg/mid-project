@@ -48,3 +48,43 @@ html body img.puppy,html body img.puppy.idle,html body img.puppy.dance-left,html
 /* Approved panoramic artwork: Maximum and Interval scenes */
 #game[data-level="3"] .game-bg{background-image:url('assets/level4-amusement.webp')!important;background-position:center!important}
 #game[data-level="4"] .game-bg{background-image:url('assets/level5-lakeside.webp')!important;background-position:center!important}
+
+/* v5: fit the entire game within the visible browser viewport */
+@media (min-width:701px){
+ html,body{min-height:100%;margin:0}
+ .shell{width:min(1540px,calc(100% - 24px));max-width:none;height:calc(100dvh - 20px);min-height:560px;margin:10px auto;display:flex;flex-direction:column}
+ .topbar{height:54px;flex:0 0 54px}
+ .screen.active{flex:1;min-height:0}
+ #game.active{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;row-gap:5px;padding:12px 22px 10px;min-height:0}
+ #game .hud{min-height:55px}
+ #game .hud .pill{padding:7px 14px}
+ #game .game-progress{margin:0 auto;width:55%;height:15px}
+ #game .play-area{height:auto;min-height:0}
+ #game .lanes{height:calc(100% - 6px);max-height:none;top:3px}
+ #game .game-puppy{width:min(22%,210px)}
+ #game .game-puppy .puppy{max-height:min(26dvh,205px)}
+ #game .combo{bottom:10px;font-size:1.2rem}
+ #game .combo strong{font-size:2.4rem}
+ #game .controls{align-self:center}
+ #game .controls button{padding:7px 16px;font-size:.96rem}
+ #game .game-tip{margin:0 auto;font-size:.76rem}
+ #game .game-bg{background-size:cover!important;background-position:center center!important}
+}
+@media (max-width:700px){
+ .shell{width:100%;height:100dvh;min-height:500px;margin:0;display:flex;flex-direction:column}
+ .topbar{height:48px;flex:0 0 48px}
+ .screen.active{flex:1;min-height:0;overflow-y:auto}
+ #game.active{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;row-gap:4px;min-height:0;padding:8px 8px 7px;overflow:hidden}
+ #game .hud{min-height:42px}
+ #game .game-progress{height:12px;margin:0 auto}
+ #game .play-area{height:auto;min-height:0}
+ #game .lanes{height:calc(100% - 6px);top:3px;left:5%;width:90%}
+ #game .game-puppy{width:24%;bottom:0}
+ #game .game-puppy .puppy{max-height:22dvh}
+ #game .combo{bottom:4px;font-size:.9rem}
+ #game .combo strong{font-size:1.7rem}
+ #game .controls{gap:4px;flex-wrap:nowrap}
+ #game .controls button{flex:1;min-width:0;padding:7px 2px;font-size:.75rem}
+ #game .game-tip{font-size:.67rem;margin:0 auto;max-width:100%}
+ #game .game-bg{background-size:cover!important;background-position:center!important}
+}
