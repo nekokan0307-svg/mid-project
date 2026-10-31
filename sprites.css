@@ -1,6 +1,13 @@
-/* FITBEAT actual pose frames, from approved character design. */
-.puppy[data-sprite]{animation:none!important;object-fit:contain!important;object-position:center bottom!important;max-width:100%!important;max-height:100%!important}
+/* Consistent full-body puppy sprites with gentle motion */
+.puppy[data-sprite]{
+  animation:none!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  transform-origin:50% 90%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+}
 .puppy-stage,.game-puppy{overflow:visible!important}
-.game-puppy{height:260px!important;display:flex;align-items:end;justify-content:center}
-.puppy-stage .puppy,.game-puppy .puppy{height:100%!important;width:100%!important;max-height:100%!important;object-fit:contain!important}
+.game-puppy{height:260px!important;display:flex;align-items:flex-end;justify-content:center}
+.puppy-stage .puppy,.game-puppy .puppy{height:100%!important;width:100%!important;object-fit:contain!important}
 @media(max-width:700px){.game-puppy{height:170px!important;width:34%!important}.puppy-stage{height:190px!important}}
