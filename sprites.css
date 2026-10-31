@@ -1,3 +1,22 @@
+/* FITBEAT NO MOTION — overrides all old character animations. */
+/* Higher specificity than art-ui.css and previous sprite rules. */
+html body .shell .screen img.puppy,
+html body .shell .screen img.puppy.idle,
+html body .shell .screen img.puppy.dance-left,
+html body .shell .screen img.puppy.dance-right,
+html body .shell .screen img.puppy.reach,
+html body .shell .screen img.puppy.twist,
+html body .shell .screen img.puppy.cheer,
+html body .shell .screen img.puppy.miss,
+html body .shell .screen img.puppy.static-puppy {
+  animation: none !important;
+  animation-name: none !important;
+  transition: none !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+.puppy[data-reaction] { animation: none !important; }
+
 /* FITBEAT STATIC REACTIONS: no transform animations, no sprite cycling. */
 .puppy.static-puppy,.puppy[data-reaction]{
  animation:none!important;
