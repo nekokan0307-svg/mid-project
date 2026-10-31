@@ -1,9 +1,15 @@
-# FITBEAT v0.3 — Separate Art Layers
+# FITBEAT v0.4 — Hand-drawn backgrounds
 
-This build replaces the previous full-screen concept-art screenshots with original standalone SVG backgrounds (`assets/*-scene.svg`). **No menus, characters, labels, scores or buttons are baked into these backgrounds.** The puppy remains a separate SVG with CSS movement animations; the rhythm targets and HUD are live HTML/JS.
+Four **separate** backgrounds, cropped from the approved 2×2 image:
 
-## Deploy to GitHub Pages
-Unzip and upload the **contents** (not the ZIP) to the root of `mid-project` on branch `main`, replacing matching files. Open `https://nekokan0307-svg.github.io/mid-project/?v=3`. You may leave old image files in assets; they are no longer used for screen backgrounds.
+- `assets/menu-bakery.webp` — Home menu
+- `assets/level1-spring.webp` — Level 1 / Easy
+- `assets/level2-bakery.webp` — Level 2 / Medium
+- `assets/level3-night.webp` — Level 3 / Hard
 
-## Current limitations
-The puppy is an animated single SVG using CSS transformations, not yet a multi-frame skeletal animation. iPhone controller displays motion readings but does not yet send live commands to the computer. Keyboard controls work.
+`scene-fix.css` selects the correct image and `game.js` updates `data-level` when starting each level. Existing gameplay, puppy SVG and controller files are preserved.
+
+## GitHub Pages installation
+Upload/replace the following at the **repository root**: `index.html`, `game.js`, `scene-fix.css`, plus the four new images inside `assets/`. Other existing files can stay unchanged.
+
+No menu buttons, text, puppy or score are baked into these backgrounds.

@@ -13,3 +13,11 @@
 .game-puppy .puppy{width:100%;max-height:260px}
 .scenic{pointer-events:none}
 @media(max-width:700px){.home-content{grid-template-columns:1fr;grid-template-rows:auto auto 190px auto;min-height:620px}.home-content .logo{font-size:3.5rem}.puppy-stage{grid-column:1;grid-row:3;height:190px}.puppy-stage .puppy{width:auto!important;height:185px!important;max-height:185px!important}.menu{grid-column:1;grid-row:4}.menu button{width:min(300px,90%)}.game-puppy{width:25%}}
+
+/* v0.4: four individually cropped hand-drawn game scenes */
+.home-art{background-image:url('assets/menu-bakery.webp')!important;background-position:center!important}
+.game-bg{background-image:url('assets/level1-spring.webp')!important;background-position:center!important}
+#game[data-level="0"] .game-bg{background-image:url('assets/level1-spring.webp')!important}
+#game[data-level="1"] .game-bg{background-image:url('assets/level2-bakery.webp')!important}
+#game[data-level="2"] .game-bg{background-image:url('assets/level3-night.webp')!important}
+.result-bg{background-image:url('assets/menu-bakery.webp')!important}

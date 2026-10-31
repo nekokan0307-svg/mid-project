@@ -1,0 +1,4 @@
+FITBEAT approved 4 backgrounds — complete website files.
+Upload the CONTENTS of this folder to the ROOT of your GitHub repository (not the folder itself).
+Ensure index.html, game.js, style.css, scene-fix.css are at root, and four .webp files in assets/.
+This version uses exact four approved crops, and game.js switches background per level.
