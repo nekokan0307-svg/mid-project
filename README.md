@@ -1,15 +1,13 @@
-# FITBEAT v0.4 — Hand-drawn backgrounds
+# FITBEAT — Art Pack v1
 
-Four **separate** backgrounds, cropped from the approved 2×2 image:
+Includes the approved four original backgrounds, a cut-out mascot from the approved character design sheet, separate pastel flower-note icons, and updated HTML/CSS/JS.
 
-- `assets/menu-bakery.webp` — Home menu
-- `assets/level1-spring.webp` — Level 1 / Easy
-- `assets/level2-bakery.webp` — Level 2 / Medium
-- `assets/level3-night.webp` — Level 3 / Hard
+## Upload to GitHub
+1. Open https://github.com/nekokan0307-svg/mid-project
+2. Choose Add file → Upload files.
+3. Open the FITBEAT-ART-v1-upload folder on your computer, select ALL files and the assets folder contents, and drag them onto GitHub upload page. Ensure the assets directory is preserved.
+4. Commit changes, then refresh the live site.
 
-`scene-fix.css` selects the correct image and `game.js` updates `data-level` when starting each level. Existing gameplay, puppy SVG and controller files are preserved.
+Keep the ZIP as backup; upload the unzipped CONTENTS, not the ZIP itself.
 
-## GitHub Pages installation
-Upload/replace the following at the **repository root**: `index.html`, `game.js`, `scene-fix.css`, plus the four new images inside `assets/`. Other existing files can stay unchanged.
-
-No menu buttons, text, puppy or score are baked into these backgrounds.
+Important: The mascot is a static transparent cutout from the selected concept sheet, animated with CSS movement (not a complete frame-by-frame sprite set). Remote phone pairing is not implemented.
