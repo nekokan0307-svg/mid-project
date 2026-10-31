@@ -1,9 +1,4 @@
-FITBEAT v6 — แก้หน้าจอล้นจริงทั้งหน้าเลือก Exercise และหน้าเล่นเกม
-
-อัปโหลด sprites.css ทับไฟล์เดิมในโฟลเดอร์หลักของ GitHub แล้วกด Commit changes
-ถ้าต้องการอัปเดตจากเวอร์ชันเก่ากว่า v5 ให้อัปโหลด game.js และภาพทั้งสองไฟล์ใน assets/ ด้วย
-กด Ctrl+Shift+R หลังอัปโหลด
-
-รวมทุกอย่างจาก v5: เพลง, ระดับความหนัก 5 ระดับ, Warm-up/Workout/Cool-down, Intensity Guide, Hit Zone, ฉากใหม่ และ Art v3
-
-การแก้ v6: กำหนดความสูงกรอบตาม viewport, ยกเลิก min-height เดิมของ screen, จัดหน้าเลือก Exercise แบบกึ่งกลางและลดขนาดการ์ดตามความสูง, จัดเลนเกมตามพื้นที่ที่เหลือ
+FITBEAT — Screen Fit Tested
+อัปโหลดไฟล์ทั้งหมดใน ZIP ไปที่ root ของ repository โดยคงโฟลเดอร์ assets ตามเดิม
+โค้ด responsive ถูกรวมไว้ใน sprites.css แบบเดียว ไม่ซ้อน v5/v6
+ตรวจสอบใน Chromium ที่ความละเอียด 1648×928 และ 390×844
