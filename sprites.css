@@ -1,42 +1,6 @@
-/* FITBEAT NO MOTION — overrides all old character animations. */
-/* Higher specificity than art-ui.css and previous sprite rules. */
-html body .shell .screen img.puppy,
-html body .shell .screen img.puppy.idle,
-html body .shell .screen img.puppy.dance-left,
-html body .shell .screen img.puppy.dance-right,
-html body .shell .screen img.puppy.reach,
-html body .shell .screen img.puppy.twist,
-html body .shell .screen img.puppy.cheer,
-html body .shell .screen img.puppy.miss,
-html body .shell .screen img.puppy.static-puppy {
-  animation: none !important;
-  animation-name: none !important;
-  transition: none !important;
-  transform: none !important;
-  will-change: auto !important;
+/* FITBEAT still-only v3 — prevent all legacy mascot movement */
+html body img.puppy,html body img.puppy.idle,html body img.puppy.dance-left,html body img.puppy.dance-right,html body img.puppy.reach,html body img.puppy.twist,html body img.puppy.cheer,html body img.puppy.miss,html body img.puppy.still-puppy {
+ animation:none!important;animation-name:none!important;transition:none!important;transform:none!important;filter:none!important;will-change:auto!important;
+ object-fit:contain!important;object-position:center center!important;
 }
-.puppy[data-reaction] { animation: none !important; }
-
-/* FITBEAT STATIC REACTIONS: no transform animations, no sprite cycling. */
-.puppy.static-puppy,.puppy[data-reaction]{
- animation:none!important;
- transition:none!important;
- transform:none!important;
- filter:none!important;
- object-fit:contain!important;
- object-position:center bottom!important;
- width:100%!important;
- height:100%!important;
- max-width:100%!important;
- max-height:100%!important;
- display:block!important;
-}
-.puppy-stage,.game-puppy{overflow:visible!important}
-.puppy-stage{height:300px!important;max-width:290px;margin-inline:auto}
-.game-puppy{height:245px!important;width:24%!important;display:flex;align-items:flex-end;justify-content:center}
-.result-card>.puppy{height:225px!important;width:240px!important;margin-inline:auto}
-@media(max-width:700px){
- .puppy-stage{height:195px!important;max-width:185px}
- .game-puppy{height:155px!important;width:32%!important}
- .result-card>.puppy{height:170px!important;width:180px!important}
-}
+html body .puppy { overflow:visible!important; }

@@ -1,54 +1,19 @@
-/* FITBEAT STATIC REACTIONS — intentionally no sprite animation. */
-(() => {
- const base='assets/reactions/';
- const files=['idle','ready','go','good','great','perfect','sad','miss','tired','encourage','keep-going','awesome','clear','victory','level-up','game-over','try-again','dont-give-up'];
- const cache={};
- files.forEach(n=>{const i=new Image();i.src=base+n+'.png';cache[n]=i;});
- const puppy=[...document.querySelectorAll('.puppy')];
+/* FITBEAT still-only mascot, v3 */
+(()=>{
+ const names=['idle','good','great','perfect','sad','miss','tired','encourage'];
+ const imgs={};for(const n of names){const i=new Image();i.src='assets/reactions/'+n+'.png';imgs[n]=i.src}
  const dancer=document.getElementById('dancer');
- const feedback=document.getElementById('feedback');
- const score=document.getElementById('score');
- const combo=document.getElementById('combo');
- const result=document.querySelector('#results .puppy');
- let lastReaction='',timer;
- function show(img,name) {
-   if(!img||!cache[name])return;
-   img.src=cache[name].src;
-   img.dataset.reaction=name;
-   img.className='puppy static-puppy';
- }
- puppy.forEach(i=>show(i,i===result?'victory':'idle'));
- function react(name,delay=1100){
-   if(!dancer)return;
-   show(dancer,name);lastReaction=name;
-   clearTimeout(timer);
-   timer=setTimeout(()=>{show(dancer,'encourage');lastReaction='encourage';},delay);
- }
- function evaluate(){
-   if(!feedback)return;
-   const f=feedback.textContent.trim().toLowerCase();
-   if(f.includes('perfect'))react('perfect',1100);
-   else if(f.includes('good'))react('good',1100);
-   else if(f.includes('miss'))react('sad',1300);
-   else if(f.includes('ready'))react('ready',900);
- }
- if(feedback)new MutationObserver(evaluate).observe(feedback,{childList:true,characterData:true,subtree:true});
+ const all=[...document.querySelectorAll('img.puppy')];
+ let current='idle',until=0;
+ function set(el,n){if(!el)return;const url=imgs[n]||imgs.idle;if(el.getAttribute('src')!==url)el.src=url;el.dataset.reaction=n;}
+ all.forEach(el=>set(el,el===dancer?'idle':'good'));
+ function reaction(n){current=n;until=Date.now()+1150;set(dancer,n)}
+ const fb=document.getElementById('feedback');
+ if(fb)new MutationObserver(()=>{const s=fb.textContent.toLowerCase();if(s.includes('perfect'))reaction('perfect');else if(s.includes('good'))reaction('good');else if(s.includes('miss'))reaction('sad');else if(s.includes('early')||s.includes('keep'))reaction('encourage')}).observe(fb,{childList:true,subtree:true,characterData:true});
+ // Game's animate() changes class names. Never animate the image; leave its src alone.
+ if(dancer)new MutationObserver(()=>{if(dancer.className!=='puppy still-puppy')dancer.className='puppy still-puppy'}).observe(dancer,{attributes:true,attributeFilter:['class']});
+ setInterval(()=>{if(dancer&&Date.now()>until&&current!=='idle'){current='idle';set(dancer,'idle')}},200);
+ const result=document.querySelector('#results img.puppy');
  const results=document.getElementById('results');
- if(results){
-  new MutationObserver(()=>{
-   if(!results.classList.contains('active'))return;
-   const p=+(document.getElementById('perfect')?.textContent||0);
-   const g=+(document.getElementById('good')?.textContent||0);
-   const m=+(document.getElementById('miss')?.textContent||0);
-   const total=p+g+m;
-   show(result,total===0?'encourage':p/total>=.65?'victory':(p+g)/total>=.5?'clear':'dont-give-up');
-  }).observe(results,{attributes:true,attributeFilter:['class']});
- }
- const home=document.querySelector('#home .puppy');
- if(home)show(home,'awesome');
- // The game changes .puppy classes for its old CSS animation.
- // Restore static cards without restarting any frame-based movement.
- if(dancer)new MutationObserver(()=>{
-  if(!dancer.classList.contains('static-puppy'))dancer.className='puppy static-puppy';
- }).observe(dancer,{attributes:true,attributeFilter:['class']});
+ if(results&&result)new MutationObserver(()=>{if(!results.classList.contains('active'))return;const p=Number(document.getElementById('perfect')?.textContent||0),g=Number(document.getElementById('good')?.textContent||0),m=Number(document.getElementById('miss')?.textContent||0);set(result,p+g+m===0?'encourage':p>=m?'perfect':'sad')}).observe(results,{attributes:true,attributeFilter:['class']});
 })();

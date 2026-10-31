@@ -1,4 +1,9 @@
-อัปโหลดไฟล์ sprites.css ทับไฟล์เดิมใน GitHub โฟลเดอร์หลักเท่านั้น
-ไม่ต้องแก้ index.html หรือไฟล์อื่น
-กด Commit changes แล้วกด Ctrl+Shift+R ในหน้าเกม
-ภาพจะเปลี่ยนตามคะแนน แต่ตัวละครจะไม่เด้ง หมุน หรือเต้น
+FITBEAT CLEAN PUPPY v3
+
+1. แตก ZIP
+2. อัปโหลด sprites.js และ sprites.css ทับไฟล์เดิมที่ root ของ repo
+3. อัปโหลด assets/reactions ทั้ง 8 ภาพทับไฟล์เดิม
+4. Commit changes และ Refresh แบบไม่ใช้ cache
+
+ภาพ PNG มีพื้นหลังโปร่งใส ไม่มีกรอบสี่เหลี่ยม และไม่ใช้แอนิเมชันของตัวละคร
+ไฟล์ index.html และฉากหลังเดิมไม่ต้องแก้
