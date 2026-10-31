@@ -1,0 +1,11 @@
+/* FITBEAT v0.2 — safe layout fix. Load AFTER style.css */
+#home .home-content{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,1fr);grid-template-rows:auto auto minmax(290px,1fr);column-gap:24px;align-items:center;min-height:600px;width:100%;isolation:isolate}
+#home .logo,#home .subtitle{position:relative;z-index:2}
+#home .puppy-stage{grid-column:1;grid-row:3;display:flex;align-items:flex-end;justify-content:center;align-self:stretch;min-width:0;min-height:0;height:330px;overflow:visible;position:relative;z-index:1}
+#home .puppy-stage img.puppy{display:block;position:relative;inset:auto;width:auto !important;height:auto !important;max-width:min(100%,290px) !important;max-height:310px !important;object-fit:contain;flex:none;transform-origin:50% 85%}
+#home .menu{grid-column:2;grid-row:3;position:relative;z-index:3;width:100%;align-self:center}
+#home .menu button{max-width:290px;width:100%}
+#game .game-puppy{overflow:visible;max-width:260px}
+#game .game-puppy img.puppy{display:block;width:100% !important;height:auto !important;max-width:260px !important;max-height:310px !important;object-fit:contain}
+#results .result-card img.puppy{width:140px !important;height:auto !important;max-height:160px !important;object-fit:contain}
+@media(max-width:700px){#home .home-content{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto 190px auto;gap:8px;min-height:580px}#home .logo{grid-column:1;grid-row:1;font-size:clamp(2.8rem,12vw,4rem)}#home .subtitle{grid-column:1;grid-row:2;font-size:1rem}#home .puppy-stage{grid-column:1;grid-row:3;height:190px;align-self:center}#home .puppy-stage img.puppy{max-width:190px !important;max-height:185px !important}#home .menu{grid-column:1;grid-row:4;gap:8px}#home .menu button{max-width:280px}#game .game-puppy{max-width:135px}#game .game-puppy img.puppy{max-width:135px !important;max-height:175px !important}}
