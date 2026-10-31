@@ -88,3 +88,47 @@ html body img.puppy,html body img.puppy.idle,html body img.puppy.dance-left,html
  #game .game-tip{font-size:.67rem;margin:0 auto;max-width:100%}
  #game .game-bg{background-size:cover!important;background-position:center!important}
 }
+
+/* v6 — viewport-first layout: override old 690px min-height and page scrolling. */
+html,body{width:100%;min-height:100%;margin:0}
+body{overflow-x:hidden}
+.shell{box-sizing:border-box;display:flex;flex-direction:column;width:min(1540px,calc(100% - 16px));max-width:none;height:calc(100dvh - 16px);min-height:0;margin:8px auto;overflow:hidden}
+.topbar{box-sizing:border-box;flex:0 0 54px;min-height:0}
+.shell>.screen{box-sizing:border-box;min-height:0;flex:1 1 auto}
+.shell>.screen.active{min-height:0}
+/* Level selection: keep the entire content visible without a tall empty panel. */
+#levels.active{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(6px,1.4vh,14px);padding:clamp(8px,2vh,22px);overflow-y:auto}
+#levels h2{font-size:clamp(1.5rem,3.4vw,2.7rem);margin:0;line-height:1.1;flex-shrink:0}
+#levels .fb-phase-tabs{margin:0;flex-shrink:0}
+#levels .fb-phase-help{margin:0;flex-shrink:0}
+#levels .level-grid{width:min(100%,1160px);max-width:1160px;margin:0;gap:clamp(8px,1vw,14px);flex:0 1 auto;align-items:stretch}
+#levels .level{gap:5px;padding:9px;min-width:0}
+#levels .level img{height:clamp(85px,22vh,185px);object-fit:cover}
+#levels>.secondary{flex-shrink:0;margin:2px auto 0}
+/* Gameplay: allocate all remaining height to playfield, not fixed 460px. */
+#game.active{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;row-gap:clamp(3px,.7vh,7px);padding:clamp(6px,1.5vh,14px) clamp(8px,2vw,24px);overflow:hidden}
+#game .hud{min-height:0}
+#game .game-progress{height:14px;margin:0 auto}
+#game .play-area{height:auto;min-height:0;overflow:hidden}
+#game .lanes{height:calc(100% - 8px);top:4px}
+#game .game-puppy{bottom:0}
+#game .controls{flex-shrink:0}
+#game .game-tip{flex-shrink:0;margin:0 auto}
+@media(max-width:700px){
+ .shell{width:100%;height:100dvh;margin:0;border-radius:0}
+ .topbar{flex-basis:48px}
+ #levels.active{justify-content:flex-start;gap:10px;overflow-y:auto}
+ #levels .level-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #levels .level img{height:clamp(82px,17vh,135px)}
+ #game.active{padding:6px 6px 5px}
+ #game .play-area{min-height:0;height:auto}
+ #game .lanes{height:calc(100% - 6px)}
+}
+@media(max-height:690px) and (min-width:701px){
+ #levels.active{gap:5px;padding:7px}
+ #levels h2{font-size:1.65rem}
+ #levels .level img{height:clamp(70px,19vh,130px)}
+ #levels .fb-phase-tabs button{padding:6px 12px}
+ #game .hud .pill{padding:4px 10px}
+ #game .controls button{padding:5px 12px}
+}
