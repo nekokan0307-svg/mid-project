@@ -1,13 +1,23 @@
-/* Consistent full-body puppy sprites with gentle motion */
-.puppy[data-sprite]{
-  animation:none!important;
-  object-fit:contain!important;
-  object-position:center bottom!important;
-  transform-origin:50% 90%!important;
-  max-width:100%!important;
-  max-height:100%!important;
+/* FITBEAT STATIC REACTIONS: no transform animations, no sprite cycling. */
+.puppy.static-puppy,.puppy[data-reaction]{
+ animation:none!important;
+ transition:none!important;
+ transform:none!important;
+ filter:none!important;
+ object-fit:contain!important;
+ object-position:center bottom!important;
+ width:100%!important;
+ height:100%!important;
+ max-width:100%!important;
+ max-height:100%!important;
+ display:block!important;
 }
 .puppy-stage,.game-puppy{overflow:visible!important}
-.game-puppy{height:260px!important;display:flex;align-items:flex-end;justify-content:center}
-.puppy-stage .puppy,.game-puppy .puppy{height:100%!important;width:100%!important;object-fit:contain!important}
-@media(max-width:700px){.game-puppy{height:170px!important;width:34%!important}.puppy-stage{height:190px!important}}
+.puppy-stage{height:300px!important;max-width:290px;margin-inline:auto}
+.game-puppy{height:245px!important;width:24%!important;display:flex;align-items:flex-end;justify-content:center}
+.result-card>.puppy{height:225px!important;width:240px!important;margin-inline:auto}
+@media(max-width:700px){
+ .puppy-stage{height:195px!important;max-width:185px}
+ .game-puppy{height:155px!important;width:32%!important}
+ .result-card>.puppy{height:170px!important;width:180px!important}
+}

@@ -1,36 +1,54 @@
-/* FITBEAT smooth sprites v2 — consistent frame scale, preloading, gentler timing. */
+/* FITBEAT STATIC REACTIONS — intentionally no sprite animation. */
 (() => {
-  const counts = {idle:9,left:9,right:9,jump:9,twist:4,perfect:6,good:4,miss:4};
-  const base = 'assets/sprites/';
-  const cache = {};
-  for (const [kind,n] of Object.entries(counts)) {
-    cache[kind] = [];
-    for(let i=1;i<=n;i++){
-      const im=new Image();
-      im.src=`${base}${kind}_${String(i).padStart(2,'0')}.png`;
-      cache[kind].push(im);
-    }
-  }
-  const actors = [...document.querySelectorAll('.puppy')];
-  const states = new WeakMap();
-  const map = {'dance-left':'left','dance-right':'right','reach':'jump','twist':'twist','cheer':'perfect','miss':'miss','idle':'idle'};
-  function tick(t){
-    for(const img of actors){
-      const cls=img.classList;
-      const action=['dance-left','dance-right','reach','twist','miss','cheer'].find(k=>cls.contains(k))||'idle';
-      const kind=map[action];
-      let st=states.get(img);
-      if(!st || st.kind!==kind){st={kind,start:t,index:-1};states.set(img,st);}
-      const frameMs=kind==='idle'?175:kind==='miss'?220:145;
-      const idx=Math.floor((t-st.start)/frameMs)%counts[kind];
-      if(idx!==st.index){
-        const next=cache[kind][idx];
-        if(next.complete && next.naturalWidth) img.src=next.src;
-        st.index=idx;
-      }
-      img.dataset.sprite=kind;
-    }
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
+ const base='assets/reactions/';
+ const files=['idle','ready','go','good','great','perfect','sad','miss','tired','encourage','keep-going','awesome','clear','victory','level-up','game-over','try-again','dont-give-up'];
+ const cache={};
+ files.forEach(n=>{const i=new Image();i.src=base+n+'.png';cache[n]=i;});
+ const puppy=[...document.querySelectorAll('.puppy')];
+ const dancer=document.getElementById('dancer');
+ const feedback=document.getElementById('feedback');
+ const score=document.getElementById('score');
+ const combo=document.getElementById('combo');
+ const result=document.querySelector('#results .puppy');
+ let lastReaction='',timer;
+ function show(img,name) {
+   if(!img||!cache[name])return;
+   img.src=cache[name].src;
+   img.dataset.reaction=name;
+   img.className='puppy static-puppy';
+ }
+ puppy.forEach(i=>show(i,i===result?'victory':'idle'));
+ function react(name,delay=1100){
+   if(!dancer)return;
+   show(dancer,name);lastReaction=name;
+   clearTimeout(timer);
+   timer=setTimeout(()=>{show(dancer,'encourage');lastReaction='encourage';},delay);
+ }
+ function evaluate(){
+   if(!feedback)return;
+   const f=feedback.textContent.trim().toLowerCase();
+   if(f.includes('perfect'))react('perfect',1100);
+   else if(f.includes('good'))react('good',1100);
+   else if(f.includes('miss'))react('sad',1300);
+   else if(f.includes('ready'))react('ready',900);
+ }
+ if(feedback)new MutationObserver(evaluate).observe(feedback,{childList:true,characterData:true,subtree:true});
+ const results=document.getElementById('results');
+ if(results){
+  new MutationObserver(()=>{
+   if(!results.classList.contains('active'))return;
+   const p=+(document.getElementById('perfect')?.textContent||0);
+   const g=+(document.getElementById('good')?.textContent||0);
+   const m=+(document.getElementById('miss')?.textContent||0);
+   const total=p+g+m;
+   show(result,total===0?'encourage':p/total>=.65?'victory':(p+g)/total>=.5?'clear':'dont-give-up');
+  }).observe(results,{attributes:true,attributeFilter:['class']});
+ }
+ const home=document.querySelector('#home .puppy');
+ if(home)show(home,'awesome');
+ // The game changes .puppy classes for its old CSS animation.
+ // Restore static cards without restarting any frame-based movement.
+ if(dancer)new MutationObserver(()=>{
+  if(!dancer.classList.contains('static-puppy'))dancer.className='puppy static-puppy';
+ }).observe(dancer,{attributes:true,attributeFilter:['class']});
 })();
